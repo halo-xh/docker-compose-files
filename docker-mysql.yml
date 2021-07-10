@@ -1,0 +1,36 @@
+version: '3'
+services:
+  mysql8:
+    hostname: mysql8
+    image: mysql:8.0.16
+    container_name: mysql8
+    # 指定容器退出后的重启策略为始终重启
+    restart: always
+    volumes:
+      #mysql数据库挂载到host物理机目录
+      - "/home/xh/dockerlog/mysql/data:/var/lib/mysql"
+      #容器的配置目录挂载到host物理机目录
+      - "/home/xh/dockerlog/mysql/conf.d:/etc/mysql/conf.d"
+    # 设置环境变量,相当于docker run命令中的-e
+    environment:
+      TZ: Asia/Shanghai
+      LANG: en_US.UTF-8
+      # 设置root用户密码
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: demo
+      MYSQL_USER: test
+      MYSQL_PASSWORD: 123456
+    # 映射端口
+    ports:
+      - "23306:3306"
+    command:
+      # 将mysql8.0默认密码策略 修改为 原先 策略 (mysql8.0对其默认策略做了更改 会导致密码无法匹配)
+      --default-authentication-plugin=mysql_native_password
+      --character-set-server=utf8mb4
+      --collation-server=utf8mb4_general_ci
+      --explicit_defaults_for_timestamp=true
+      --lower_case_table_names=1
+networks: #配置和mysql容器互通的网络net-docker
+  default:
+    external:
+      name: net-docker
