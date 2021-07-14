@@ -1,0 +1,16 @@
+version: "3"
+services:
+  nacos1:
+    hostname: nacos
+    container_name: nacos-standalone
+    image: nacos/nacos-server:latest
+    restart: on-failure
+    volumes:
+      - /home/xh/dockerlog/nacos/standalone-logs/:/home/nacos/logs
+      - /home/xh/dockerfiles/nacos/custom.properties:/home/nacos/init.d/custom.properties
+    ports:
+      - "9847:8848"
+      - "9848:9848"
+      - "9555:9555"
+    env_file:
+      - /home/xh/dockerfiles/nacos/nacos-standalone-mysql.env
