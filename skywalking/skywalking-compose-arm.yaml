@@ -11,6 +11,8 @@ services:
       SW_STORAGE: elasticsearch
       SW_STORAGE_ES_CLUSTER_NODES: elasticsearch:9200
       JAVA_OPTS: "-Xms1024m -Xmx1024m"
+    networks:
+      - es-net
 
   ui:
     image: apache/skywalking-ui:8.9.0
@@ -25,3 +27,6 @@ services:
     environment:
       SW_OAP_ADDRESS: http://oap:12800
       TZ: Asia/Shanghai
+networks:
+  es-net:
+    external: true

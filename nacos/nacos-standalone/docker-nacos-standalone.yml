@@ -6,7 +6,7 @@ services:
     image: zhusaidong/nacos-server-m1:2.0.3
     restart: "no"
     volumes:
-      - /Users/hongxiao/IdeaProjects/docker-compose-files-main/nacos/nacos-standalone/standalone-logs/:/home/nacos/logs
+      - /Users/hongxiao/docker-volumes/nacos/nacos-standalone/standalone-logs/:/home/nacos/logs
     ports:
       - "8848:8848"
       - "9848:9848"
@@ -20,4 +20,9 @@ services:
       - JVM_XMN=300m    #-Xmn	default :1g
       - JVM_MS=300m     #-XX:MetaspaceSize	default :128m
       - JVM_MMS=300m  #
+    networks:
+      - net-docker
+networks:
+  net-docker:
+    external: true
 

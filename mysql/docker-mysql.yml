@@ -2,13 +2,12 @@ version: '3'
 services:
   mysql8:
     hostname: mysql8
-    image: mysql:oracle
+    image: mysql/mysql-server:latest
     container_name: mysql8
     restart: "no"
     volumes:
-      - /Users/hongxiao/IdeaProjects/docker-compose-files-main/mysql/data:/var/lib/mysql
-      - /Users/hongxiao/IdeaProjects/docker-compose-files-main/mysql/mydir:/mydir
-      - /Users/hongxiao/IdeaProjects/docker-compose-files-main/mysql/conf/my.cnf:/etc/my.cnf
+      - /Users/hongxiao/docker-volumes/mysql/data:/var/lib/mysql
+      - /Users/hongxiao/docker-volumes/mysql/conf.d:/etc/mysql/conf.d
     environment:
       TZ: Asia/Shanghai
       LANG: en_US.UTF-8

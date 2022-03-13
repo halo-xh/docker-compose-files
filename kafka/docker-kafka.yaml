@@ -5,9 +5,9 @@ services:
     ports:
       - "2181:2181"
     volumes:
-      - /Users/hongxiao/IdeaProjects/docker-compose-files-main/kafka/zk/logs:/datalog
-      - /Users/hongxiao/IdeaProjects/docker-compose-files-main/kafka/zk/data:/data
-      - /Users/hongxiao/IdeaProjects/docker-compose-files-main/kafka/zk/conf:/conf
+      - /Users/hongxiao/docker-volumes/kafka/zk/logs:/datalog
+      - /Users/hongxiao/docker-volumes/kafka/zk/data:/data
+      - /Users/hongxiao/docker-volumes/kafka/zk/conf:/conf
   kafka:
     image: wurstmeister/kafka:latest
     ports:
@@ -20,4 +20,4 @@ services:
       KAFKA_LOG_DIRS: "/kafka/KafkaLog"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-      - /Users/hongxiao/IdeaProjects/docker-compose-files-main/kafka/kafkalogs:/kafka/KafkaLog
+      - /Users/hongxiao/docker-volumes/kafka/kafkalogs:/kafka/KafkaLog

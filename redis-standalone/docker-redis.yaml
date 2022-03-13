@@ -7,7 +7,7 @@ services:
      ports:
        - "6379:6379"
      volumes:
-       - /Users/hongxiao/IdeaProjects/docker-compose-files-main/redis-standalone/redis.conf:/etc/redis/redis.conf
-       - /Users/hongxiao/IdeaProjects/docker-compose-files-main/redis-standalone/data:/data
+       - /Users/hongxiao/docker-volumes/redis-standalone/redis.conf:/etc/redis/redis.conf
+       - /Users/hongxiao/docker-volumes/redis-standalone/data:/data
      command: redis-server /etc/redis/redis.conf
      privileged: true
