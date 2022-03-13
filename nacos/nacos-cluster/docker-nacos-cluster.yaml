@@ -1,0 +1,73 @@
+version: "3"
+services:
+  nacos1:
+    hostname: nacos1
+    container_name: nacos1
+    image: zhusaidong/nacos-server-m1:2.0.3
+    restart: on-failure
+    volumes:
+      - /Users/hongxiao/IdeaProjects/docker-compose-files-main/nacos/nacos-cluster/nacos1/standalone-logs/:/home/nacos/logs
+      - /Users/hongxiao/IdeaProjects/docker-compose-files-main/nacos/nacos-cluster/custom.properties:/home/nacos/init.d/custom.properties
+    ports:
+      - "9848:8848"
+      - "9555:9555"
+    env_file:
+      - /Users/hongxiao/IdeaProjects/docker-compose-files-main/nacos/nacos-cluster/nacos-hostname.env
+    networks:
+      - net-docker
+
+  nacos2:
+    hostname: nacos2
+    container_name: nacos2
+    image: zhusaidong/nacos-server-m1:2.0.3
+    restart: on-failure
+    volumes:
+      - /Users/hongxiao/IdeaProjects/docker-compose-files-main/nacos/nacos-cluster/nacos2/standalone-logs/:/home/nacos/logs
+      - /Users/hongxiao/IdeaProjects/docker-compose-files-main/nacos/nacos-cluster/custom.properties:/home/nacos/init.d/custom.properties
+    ports:
+      - "9849:8848"
+    env_file:
+      - /Users/hongxiao/IdeaProjects/docker-compose-files-main/nacos/nacos-cluster/nacos-hostname.env
+    networks:
+      - net-docker
+
+  nacos3:
+    hostname: nacos3
+    container_name: nacos3
+    image: zhusaidong/nacos-server-m1:2.0.3
+    volumes:
+      - /Users/hongxiao/IdeaProjects/docker-compose-files-main/nacos/nacos-cluster/nacos3/standalone-logs/:/home/nacos/logs
+      - /Users/hongxiao/IdeaProjects/docker-compose-files-main/nacos/nacos-cluster/custom.properties:/home/nacos/init.d/custom.properties
+    ports:
+      - "9850:8848"
+    env_file:
+      - /Users/hongxiao/IdeaProjects/docker-compose-files-main/nacos/nacos-cluster/nacos-hostname.env
+    restart: on-failure
+    networks:
+      - net-docker
+
+  # prometheus:
+  #   image: prom/prometheus
+  #   container_name: prometheus
+  #   restart: always
+  #   ports:
+  #     - "9090:9090"
+  #   volumes:
+  #     - /Users/hongxiao/IdeaProjects/docker-compose-files-main/nacos/nacos-cluster/prometheus/prometheus:/etc/prometheus
+  #     - /Users/hongxiao/IdeaProjects/docker-compose-files-main/nacos/nacos-cluster/prometheus/prometheus_data:/prometheus
+  #   command:
+  #     - '--config.file=/Users/hongxiao/IdeaProjects/docker-compose-files-main/nacos/prometheus-cluster.yaml'
+  #     - '--storage.tsdb.path=/prometheus'
+
+  # grafana:
+  #   image: grafana/grafana
+  #   container_name: grafana
+  #   restart: always
+  #   ports:
+  #     - "3000:3000"
+  #   volumes:
+  #     - /Users/hongxiao/IdeaProjects/docker-compose-files-main/nacos/nacos-cluster/grafana:/var/lib/grafana
+
+networks: #配置和mysql容器互通的网络net-docker 需要先手动创建
+  net-docker:
+    external: true

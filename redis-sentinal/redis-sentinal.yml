@@ -1,0 +1,32 @@
+version: '2'
+services:
+  sentinel1:
+    image: redis
+    container_name: redis-sentinel-1
+    ports:
+      - "26379:6379"
+    command: redis-sentinel /usr/local/etc/redis/sentinel.conf
+    volumes:
+      - "/home/xh/dockerlog/redis/sentinel1.conf:/usr/local/etc/redis/sentinel.conf"
+  sentinel2:
+    ## 镜像
+    image: redis
+    container_name: redis-sentinel-2
+    ports:
+      - "26380:6379"
+    command: redis-sentinel /usr/local/etc/redis/sentinel.conf
+    volumes:
+      - "/home/xh/dockerlog/redis/sentinel2.conf:/usr/local/etc/redis/sentinel.conf"
+  sentinel3:
+    image: redis
+    container_name: redis-sentinel-3
+    ports:
+      - "26381:6379"
+    command: redis-sentinel /usr/local/etc/redis/sentinel.conf
+    volumes:
+      - /home/xh/dockerlog/redis/sentinel3.conf:/usr/local/etc/redis/sentinel.conf
+
+networks:
+  default:
+    external:
+      name: redis_sentinel-master

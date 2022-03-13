@@ -1,0 +1,20 @@
+version: "3"
+services:
+  nacos:
+    hostname: nacos
+    container_name: nacos-standalone
+    image: hackyo/nacos:2.0
+    restart: "no"
+    volumes:
+      - /Users/hongxiao/IdeaProjects/docker-compose-files-main/nacos/nacos-standalone/standalone-logs/:/home/nacos/logs
+    env_file:
+      - /Users/hongxiao/IdeaProjects/docker-compose-files-main/nacos/nacos-standalone/nacos-standalone-mysql.env
+    environment:
+      # 内存300m
+      - JVM_XMS=300m    #-Xms	default :2g
+      - JVM_XMX=300m    #-Xmx	default :2g
+      - JVM_XMN=300m    #-Xmn	default :1g
+      - JVM_MS=300m     #-XX:MetaspaceSize	default :128m
+      - JVM_MMS=300m  #
+    network_mode: host
+

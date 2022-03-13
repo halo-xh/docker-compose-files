@@ -1,0 +1,30 @@
+version: '3.3'
+services:
+  elasticsearch:
+    hostname: elasticsearch
+    image: elasticsearch:7.17.1
+    container_name: elasticsearch
+    privileged: true
+    restart: "no"
+    ports:
+      - 9200:9200
+      - 9300:9300
+    environment:
+      - discovery.type=single-node
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms1024m -Xmx1024m"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - /Users/hongxiao/IdeaProjects/docker-compose-files-main/elasticsearch/data:/usr/share/elasticsearch/data
+      - /Users/hongxiao/IdeaProjects/docker-compose-files-main/elasticsearch/log:/usr/share/elasticsearch/logs
+      - /Users/hongxiao/IdeaProjects/docker-compose-files-main/elasticsearch/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
+  es-head:
+    image: lyws365/elasticsearch-head:arm64
+    container_name: es-head
+    ports:
+      - 9100:9100
+    links:
+      - elasticsearch
