@@ -1,0 +1,39 @@
+version: '3.4'
+services:
+  skywalking-oap:
+    image: apache/skywalking-oap-server:8.9.1
+    container_name: skywalking-oap
+    hostname: skywalking-oap
+    restart: "no"
+    ports:
+      - "11800:11800"
+      - "12800:12800"
+    environment:
+      SW_STORAGE: mysql
+      SW_JDBC_URL: jdbc:mysql://mysql8:3306/skyw?rewriteBatchedStatements=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai&connectTimeout=10000&socketTimeout=30000&autoReconnect=true&useSSL=false
+      SW_DATA_SOURCE_USER: root
+      SW_DATA_SOURCE_PASSWORD: root
+      JAVA_OPTS: "-Xms1024m -Xmx1024m"
+    networks:
+      - net-docker
+    volumes:
+      - /Users/hongxiao/docker-volumes/skw/oap-libs/:/skywalking/oap-libs/
+
+  ui:
+    image: apache/skywalking-ui:8.9.1
+    container_name: skywalking-ui
+    hostname: skywalking-ui
+    depends_on:
+      - skywalking-oap
+    restart: "no"
+    ports:
+      - "8080:8080"
+    environment:
+      SW_OAP_ADDRESS: http://skywalking-oap:12800
+      TZ: Asia/Shanghai
+    networks:
+      - net-docker
+
+networks:
+  net-docker:
+    external: true
