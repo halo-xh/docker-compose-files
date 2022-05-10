@@ -6,8 +6,8 @@ services:
     hostname: oap
     restart: "no"
     ports:
-      - 11800:11800
-      - 12800:12800
+      - "11800:11800"
+      - "12800:12800"
     environment:
       SW_STORAGE: elasticsearch
       SW_STORAGE_ES_CLUSTER_NODES: elasticsearch:9200
@@ -24,7 +24,7 @@ services:
     networks:
       - net-docker
     ports:
-      - 8080:8080
+      - "8080:8080"
     environment:
       SW_OAP_ADDRESS: http://oap:12800
       TZ: Asia/Shanghai

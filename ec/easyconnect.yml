@@ -1,0 +1,28 @@
+version: '2.4'
+
+services:
+  easyconnect:
+    image: hagb/docker-easyconnect:latest
+    container_name: easyconnect
+    hostname: easyconnect
+    ports:
+      - "1080:1080"
+      - "5901:5901"
+    networks:
+      - easyconnect_net
+    cap_add:
+      - NET_ADMIN
+    environment:
+      - PASSWORD=123456
+      - QEMU_THREAD_REUSE=''
+      - QEMU_ECAGENT_MEM_LIMIT=512
+    restart: "on-failure"
+    tty: true
+    devices:
+      - "/dev/net/tun"
+
+networks:
+  easyconnect_net:
+    driver: bridge
+    ipam:
+      driver: default
