@@ -1,0 +1,35 @@
+version: '3.3'
+services:
+  elasticsearch:
+    hostname: elasticsearch
+    image: elasticsearch:7.17.1
+    container_name: elasticsearch
+    restart: "no"
+    ports:
+      - 19200:19200
+      - 19300:19300
+    environment:
+      - "discovery.type=single-node"
+      - "bootstrap.memory_lock=true"
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    networks:
+      - es-net
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - E:\SpringBootProjects\docker-compose-files\elasticsearch\data:/usr/share/elasticsearch/data
+      - E:\SpringBootProjects\docker-compose-files\elasticsearch\log:/usr/share/elasticsearch/logs
+      - E:\SpringBootProjects\docker-compose-files\elasticsearch\amd\elasticsearch-amd.yml:/usr/share/elasticsearch/config/elasticsearch.yml
+  es-head:
+    image: mobz/elasticsearch-head:5-alpine
+    container_name: es-head
+    ports:
+      - 19100:9100
+    links:
+      - elasticsearch
+
+networks:
+  es-net:
+    external: true
