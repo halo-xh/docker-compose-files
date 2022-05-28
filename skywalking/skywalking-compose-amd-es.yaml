@@ -30,4 +30,4 @@ services:
       - es-net
 networks:
   es-net:
-    external: trueTokenProvider
+    external: true

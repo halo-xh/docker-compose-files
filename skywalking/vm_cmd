@@ -1,0 +1,3 @@
+-javaagent:E:\Tools\skywalking-agent-8.8.0\skywalking-agent.jar
+-Dskywalking.agent.service_name=skywalking-demo
+-Dskywalking.collector.backend_service=localhost:11800
