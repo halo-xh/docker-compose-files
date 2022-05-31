@@ -4,15 +4,16 @@ services:
     hostname: elasticsearch
     image: elasticsearch:7.17.1
     container_name: elasticsearch
-    privileged: true
     restart: "no"
     ports:
-      - 9200:9200
-      - 9300:9300
+      - 19200:19200
+      - 19300:19300
     environment:
-      - discovery.type=single-node
-      - bootstrap.memory_lock=true
+      - "discovery.type=single-node"
+      - "bootstrap.memory_lock=true"
       - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    networks:
+      - es-net
     ulimits:
       memlock:
         soft: -1
@@ -20,7 +21,7 @@ services:
     volumes:
       - /Users/hongxiao/docker-volumes/elasticsearch/data:/usr/share/elasticsearch/data
       - /Users/hongxiao/docker-volumes/elasticsearch/log:/usr/share/elasticsearch/logs
-      - /Users/hongxiao/IdeaProjects/docker-compose-files-main/elasticsearch/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
+      - /Users/hongxiao/IdeaProjects/docker-compose-files-main/elasticsearch/arm/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
   es-head:
     image: lyws365/elasticsearch-head:arm64
     container_name: es-head
@@ -30,6 +31,5 @@ services:
       - elasticsearch
 
 networks:
-  default:
-    external:
-      name: es-net
+  es-net:
+    external: true

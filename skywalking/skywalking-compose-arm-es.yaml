@@ -1,7 +1,7 @@
 version: '3.4'
 services:
   oap:
-    image: apache/skywalking-oap-server:8.9.0
+    image: apache/skywalking-oap-server:8.9.1
     container_name: oap
     hostname: oap
     restart: "no"
@@ -10,19 +10,19 @@ services:
       - "12800:12800"
     environment:
       SW_STORAGE: elasticsearch
-      SW_STORAGE_ES_CLUSTER_NODES: elasticsearch:9200
+      SW_STORAGE_ES_CLUSTER_NODES: elasticsearch:19200
       JAVA_OPTS: "-Xms1024m -Xmx1024m"
     networks:
       - es-net
 
   ui:
-    image: apache/skywalking-ui:8.9.0
+    image: apache/skywalking-ui:8.9.1
     container_name: skywalking-ui
     depends_on:
       - oap
     restart: "no"
     networks:
-      - net-docker
+      - es-net
     ports:
       - "8080:8080"
     environment:

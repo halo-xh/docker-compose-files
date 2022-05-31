@@ -2,8 +2,8 @@ cluster.name: es
 node.name: es-node-1
 node.master: true
 node.data: true
-http.port: 9200
-transport.tcp.port: 9300
+http.port: 19200
+transport.tcp.port: 19300
 network.bind_host: 0.0.0.0
 network.host: 0.0.0.0
 network.publish_host: 0.0.0.0
