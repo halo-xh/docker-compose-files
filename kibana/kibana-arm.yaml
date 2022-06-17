@@ -1,0 +1,16 @@
+version: '3'
+services:
+  kibana-arm:
+    image: kibana:7.17.1
+    container_name: kibana-arm
+    restart: "no"
+    volumes:
+      - /Users/hongxiao/IdeaProjects/docker-compose-files-main/kibana/kibana.yaml:/usr/share/kibana/config/kibana.yml
+    ports:
+      - 5601:5601
+    networks:
+      - es-net
+
+networks:
+  es-net:
+    external: true
