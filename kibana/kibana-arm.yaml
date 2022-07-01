@@ -1,4 +1,4 @@
-version: '3'
+version: '3.1'
 services:
   kibana-arm:
     image: kibana:7.17.1
