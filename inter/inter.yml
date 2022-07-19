@@ -1,0 +1,32 @@
+version: '3'
+services:
+  redis:
+    image: redis:latest
+    restart: "no"
+    container_name: redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - /Users/hongxiao/docker-volumes/redis-standalone/redis.conf:/etc/redis/redis.conf
+      - /Users/hongxiao/docker-volumes/redis-standalone/data:/data
+    command: redis-server /etc/redis/redis.conf
+    privileged: true
+  jenkins:
+    container_name: 'jenkins-arm'
+    image: 'jenkins/jenkins:jdk11'
+    volumes:
+      - '/Users/hongxiao/IdeaProjects/docker-compose-files-main/inter/jenkins:/var/jenkins_home'
+      - '/Users/hongxiao/IdeaProjects/docker-compose-files-main/inter/jenkins/html:/usr/share/jenkins/html'
+  nginx:
+    container_name: 'nginx'
+    depends_on:
+      - jenkins
+    image: nginx:stable
+    volumes:
+      - '/home/luokaiii/backstage_page/html:/usr/www/luokaiii/cn/html'
+      - '/home/docker-images/nginx/conf:/etc/nginx/conf.d'
+      - '/home/docker-images/nginx/cert:/etc/nginx/cert'
+    ports:
+      - 80:80 # 对外统一使用80端口
+      - 443:443
+    restart: always
