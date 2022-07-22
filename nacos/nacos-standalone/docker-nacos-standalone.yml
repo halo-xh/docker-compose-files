@@ -3,7 +3,7 @@ services:
   nacos:
     hostname: nacos
     container_name: nacos-standalone
-    image: zhusaidong/nacos-server-m1:2.0.3
+    image: nacos/nacos-server:v2.0.4-slim #zhusaidong/nacos-server-m1:2.0.3
     restart: "no"
     volumes:
       - /Users/hongxiao/docker-volumes/nacos/nacos-standalone/standalone-logs/:/home/nacos/logs
