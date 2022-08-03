@@ -1,0 +1,14 @@
+version: '3'
+
+services:
+  ch_server:
+    image: clickhouse/clickhouse-server:22.6.4
+    container_name: clickhouse
+    ports:
+      - "8123:8123"
+      - "9000:9000"
+    volumes:
+      - /Users/hongxiao/IdeaProjects/docker-compose-files-main/clickhouse/config/config.xml:/etc/clickhouse-server/config.xml
+      - /Users/hongxiao/IdeaProjects/docker-compose-files-main/clickhouse/config/users.xml:/etc/clickhouse-server/users.xml
+      - /Users/hongxiao/IdeaProjects/docker-compose-files-main/clickhouse/data:/var/lib/clickhouse:rw
+      - /Users/hongxiao/IdeaProjects/docker-compose-files-main/clickhouse/log:/var/log/clickhouse-server
