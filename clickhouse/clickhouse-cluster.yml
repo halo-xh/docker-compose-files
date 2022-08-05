@@ -1,0 +1,99 @@
+version: '2'
+
+services:
+  zookeeper-ck2:
+    image: zookeeper:latest
+    restart: always
+    hostname: zookeeper-ck2
+    container_name: zookeeper-ck2
+    ports:
+      - "2183:2181"
+      - "2184:2182"
+
+  clickhouse01-ck2:
+    image: clickhouse/clickhouse-server:22.6.4
+    hostname: clickhouse01-ck2
+    container_name: clickhouse01-ck2
+    expose:
+      - "9000"
+    user: root
+    privileged: true
+    ports:
+      - "8133:8123"
+      - "9011:9000"
+    volumes:
+      - /Users/hongxiao/IdeaProjects/docker-compose-files-main/clickhouse/cluster/ch01/etc:/etc/clickhouse-server
+      - /Users/hongxiao/IdeaProjects/docker-compose-files-main/clickhouse/cluster/ch01/data:/var/lib/clickhouse
+      - /Users/hongxiao/IdeaProjects/docker-compose-files-main/clickhouse/cluster/ch01/log/:/var/log/clickhouse-server/
+    ulimits:
+      nofile:
+        soft: 262144
+        hard: 262144
+    depends_on:
+      - "zookeeper-ck2"
+
+  clickhouse02-ck2:
+    image: clickhouse/clickhouse-server:22.6.4
+    hostname: clickhouse02-ck2
+    container_name: clickhouse02-ck2
+    expose:
+      - "9000"
+    user: root
+    privileged: true
+    ports:
+      - "9012:9000"
+      - "8134:8123"
+    volumes:
+      - /Users/hongxiao/IdeaProjects/docker-compose-files-main/clickhouse/cluster/ch02/etc:/etc/clickhouse-server
+      - /Users/hongxiao/IdeaProjects/docker-compose-files-main/clickhouse/cluster/ch02/data:/var/lib/clickhouse
+      - /Users/hongxiao/IdeaProjects/docker-compose-files-main/clickhouse/cluster/ch02/log/:/var/log/clickhouse-server/
+    ulimits:
+      nofile:
+        soft: 262144
+        hard: 262144
+    depends_on:
+      - "zookeeper-ck2"
+
+  clickhouse03-ck2:
+    image: clickhouse/clickhouse-server:22.6.4
+    hostname: clickhouse03-ck2
+    container_name: clickhouse03-ck2
+    expose:
+      - "9000"
+    user: root
+    privileged: true
+    ports:
+      - "9013:9000"
+      - "8135:8123"
+    volumes:
+      - /Users/hongxiao/IdeaProjects/docker-compose-files-main/clickhouse/cluster/ch03/etc:/etc/clickhouse-server
+      - /Users/hongxiao/IdeaProjects/docker-compose-files-main/clickhouse/cluster/ch03/data:/var/lib/clickhouse
+      - /Users/hongxiao/IdeaProjects/docker-compose-files-main/clickhouse/cluster/ch03/log/:/var/log/clickhouse-server/
+    ulimits:
+      nofile:
+        soft: 262144
+        hard: 262144
+    depends_on:
+      - "zookeeper-ck2"
+
+  clickhouse04-ck2:
+    image: clickhouse/clickhouse-server:22.6.4
+    hostname: clickhouse04-ck2
+    container_name: clickhouse04-ck2
+    expose:
+      - "9000"
+    user: root
+    privileged: true
+    ports:
+      - "9014:9000"
+      - "8136:8123"
+    volumes:
+      - /Users/hongxiao/IdeaProjects/docker-compose-files-main/clickhouse/cluster/ch03/etc:/etc/clickhouse-server
+      - /Users/hongxiao/IdeaProjects/docker-compose-files-main/clickhouse/cluster/ch03/data:/var/lib/clickhouse
+      - /Users/hongxiao/IdeaProjects/docker-compose-files-main/clickhouse/cluster/ch03/log/:/var/log/clickhouse-server/
+    ulimits:
+      nofile:
+        soft: 262144
+        hard: 262144
+    depends_on:
+      - "zookeeper-ck2"
