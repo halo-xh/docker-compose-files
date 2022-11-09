@@ -68,7 +68,7 @@ services:
       org.label-schema.group: "monitoring"
 
   cadvisor:
-    image: tesla59/cadvisor:v0.45.0
+    image: rovast/cadvisor:0.45
     container_name: cadvisor
     privileged: true
     devices:
