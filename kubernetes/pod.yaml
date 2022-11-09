@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: common-telnet
+  namespace: dev
+  labels:
+    version: "3.0"
+    env: "dev"
+    xh: "hahaha"
+spec:
+  containers:
+    - image: common:latest
+      imagePullPolicy: IfNotPresent
+      name: pod
+      ports:
+        - name: common-service
+          containerPort: 8081
+
+    - image: nginx:stable
+      imagePullPolicy: IfNotPresent
+      name: pod
+      ports:
+        - containerPort: 80
