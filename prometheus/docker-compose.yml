@@ -5,8 +5,8 @@ networks:
     driver: bridge
 
 volumes:
-    prometheus_data: {}
-    grafana_data: {}
+  prometheus_data: { }
+  grafana_data: { }
 
 services:
 
@@ -14,8 +14,8 @@ services:
     image: prom/prometheus:v2.38.0
     container_name: prometheus
     volumes:
-      - ./prometheus:/etc/prometheus
-      - ./prometheus/prometheus_data:/prometheus
+      - /Users/hongxiao/docker-volumes/prometheus/prometheus_data:/prometheus
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
     command:
       - '--config.file=/etc/prometheus/prometheus.yml'
       - '--storage.tsdb.path=/prometheus'
@@ -35,7 +35,7 @@ services:
     image: prom/alertmanager:v0.24.0
     container_name: alertmanager
     volumes:
-      - ./alertmanager:/etc/alertmanager
+      - /Users/hongxiao/docker-volumes/prometheus/alertmanager:/etc/alertmanager
     command:
       - '--config.file=/etc/alertmanager/config.yml'
       - '--storage.path=/alertmanager'
@@ -91,9 +91,9 @@ services:
     image: grafana/grafana:9.1.1
     container_name: grafana
     volumes:
-      - ./grafana/grafana_data:/var/lib/grafana
-      - ./grafana/provisioning/dashboards:/etc/grafana/provisioning/dashboards
-      - ./grafana/provisioning/datasources:/etc/grafana/provisioning/datasources
+      - /Users/hongxiao/docker-volumes/prometheus/grafana_data:/var/lib/grafana
+      - /Users/hongxiao/docker-volumes/prometheus/provisioning/dashboards:/etc/grafana/provisioning/dashboards
+      - /Users/hongxiao/docker-volumes/prometheus/provisioning/datasources:/etc/grafana/provisioning/datasources
     environment:
       - GF_SECURITY_ADMIN_USER=${ADMIN_USER:-admin}
       - GF_SECURITY_ADMIN_PASSWORD=${ADMIN_PASSWORD:-admin}
@@ -128,7 +128,7 @@ services:
       - "9093:9093"
       - "9091:9091"
     volumes:
-      - ./caddy:/etc/caddy
+      - /Users/hongxiao/docker-volumes/prometheus/caddy:/etc/caddy
     environment:
       - ADMIN_USER=${ADMIN_USER:-admin}
       - ADMIN_PASSWORD=${ADMIN_PASSWORD:-admin}
