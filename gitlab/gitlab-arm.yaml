@@ -1,0 +1,34 @@
+version: '3.1'
+services:
+  web:
+    image: gitlab/gitlab-ce-qa:16.1.4
+    restart: always
+    hostname: 'localhost'
+    container_name: gitlab-ce
+    environment:
+      GITLAB_OMNIBUS_CONFIG: |
+        external_url 'http://localhost'
+    ports:
+      - '8080:80'
+      - '8443:443'
+    volumes:
+      - '/Users/hongxiao/docker-volumes/gitlab/config:/etc/gitlab'
+      - '/Users/hongxiao/docker-volumes/gitlab/logs:/var/log/gitlab'
+      - '/Users/hongxiao/docker-volumes/gitlab/data:/var/opt/gitlab'
+    networks:
+      - gitlab
+  gitlab-runner:
+    image:  bitnami/gitlab-runner:16.2.0
+    container_name: gitlab-runner
+    restart: always
+    depends_on:
+      - web
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - '/Users/hongxiao/docker-volumes/gitlab/gitlab-runner:/etc/gitlab-runner'
+    networks:
+      - gitlab
+
+networks:
+  gitlab:
+    external: true

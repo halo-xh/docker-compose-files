@@ -3,9 +3,9 @@ server.name: kibana-arm
 server.host: "0.0.0.0"
 #
 # 这边设置自己es的地址，# [ "http://elasticsearch:19200" ]
-elasticsearch.hosts: ["https://172.31.3.199:9200"]
-elasticsearch.username: "admin"
-elasticsearch.password: "ootSTmApv269d_fChnG"
+elasticsearch.hosts: ["http://elasticsearch:19200"]
+#elasticsearch.username: "admin"
+#elasticsearch.password: "ootSTmApv269d_fChnG"
 # # 显示登陆页面
 #xpack.monitoring.ui.container.elasticsearch.enabled: true
 # 开启中文模式
