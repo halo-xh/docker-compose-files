@@ -2,7 +2,7 @@ version: '3'
 services:
   mysql8:
     hostname: mysql8
-    image: mysql/mysql-server:latest
+    image: mysql/mysql-server:latest-aarch64
     container_name: mysql8
     restart: "no"
     volumes:

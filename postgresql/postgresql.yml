@@ -1,0 +1,21 @@
+services:
+  postgres:
+    container_name: postgres_arm
+    image: pg169v:1.0
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      PGDATA: /data/postgres
+      POSTGRES_DB: postgres
+    volumes:
+      - type: bind
+        source: /Users/hongxiao/docker-volumes/postgresql
+        target: /data/postgres
+    ports:
+      - "5432:5432"
+    networks:
+      - net-docker
+    restart: unless-stopped
+networks:
+  net-docker:
+    external: true
